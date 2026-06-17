@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="page-banner">
+
+    <div class="container text-center">
+
+        <h1>Courses</h1>
+
+        <p>
+            Bharatanatyam Training Programs
+        </p>
+
+    </div>
+
+</section>
+
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            {% for course in courses %}
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="course-card">
+
+                    {% if course.image %}
+
+                    <img src="{{ course.image.url }}"
+                         class="course-image">
+
+                    {% endif %}
+
+                    <div class="p-4">
+
+                        <h4>
+                            {{ course.title }}
+                        </h4>
+
+                        <p>
+                            <strong>Duration:</strong>
+                            {{ course.duration }}
+                        </p>
+
+                        <p>
+                            <strong>Age Group:</strong>
+                            {{ course.age_group }}
+                        </p>
+
+                        <p>
+                            {{ course.description }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="text-center">
+
+                <h4>
+                    Courses will be added soon.
+                </h4>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

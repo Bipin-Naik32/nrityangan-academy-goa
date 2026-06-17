@@ -1,0 +1,331 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<section class="hero">
+
+    <div>
+
+        <h1>
+            Nrityangan Academy
+        </h1>
+
+        <p>
+            Preserving Tradition Through Bharatanatyam
+        </p>
+
+        <p>
+            Nurturing Grace, Discipline and Artistic Excellence
+        </p>
+
+        <div class="mt-4">
+
+            <a href="/contact/"
+               class="btn btn-join">
+                Join Classes
+            </a>
+
+            <a href="https://wa.me/919503937045?text=Hello%20I%20would%20like%20more%20information%20about%20Bharatanatyam%20classes%20at%20Nrityangan%20Academy."
+   target="_blank"
+               class="btn btn-whatsapp">
+                WhatsApp Us
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="py-5" style="background:#FFF8FC;">
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-md-6">
+
+                <h2 class="mb-4">
+                    Welcome to Nrityangan Academy
+                </h2>
+
+                <p>
+                    Nrityangan Academy is dedicated to nurturing
+                    talent through the classical art of Bharatanatyam.
+                    We provide structured training that combines
+                    discipline, grace, tradition, and artistic excellence.
+                </p>
+
+                <p>
+                    Our mission is to preserve India's rich cultural
+                    heritage while inspiring students to achieve
+                    confidence, creativity, and excellence.
+                </p>
+
+                <a href="/about/" class="btn btn-join">
+                    Learn More
+                </a>
+
+            </div>
+
+            <div class="col-md-6 text-center">
+
+                <img src="{% static 'images/logo.jpg' %}"
+                     class="img-fluid rounded shadow"
+                     style="max-height:400px;">
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<section class="py-5 text-center">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <h2 class="text-warning">10+</h2>
+                <p>Years Experience</p>
+            </div>
+
+            <div class="col-md-3">
+                <h2 class="text-warning">200+</h2>
+                <p>Students Trained</p>
+            </div>
+
+            <div class="col-md-3">
+                <h2 class="text-warning">50+</h2>
+                <p>Performances</p>
+            </div>
+
+            <div class="col-md-3">
+                <h2 class="text-warning">20+</h2>
+                <p>Awards</p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <h2>
+                Gallery Highlights
+            </h2>
+
+            <p>
+                Moments from performances, workshops and events
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            {% for photo in latest_photos %}
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="home-gallery-card">
+
+                    <img src="{{ photo.image.url }}"
+                         class="home-gallery-img"
+                         alt="{{ photo.title }}">
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="text-center mt-4">
+
+            <a href="/gallery/"
+               class="btn btn-join">
+
+                View Full Gallery
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="py-5 bg-light">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <h2>Upcoming Events</h2>
+
+            <p>
+                Workshops, Performances & Special Programs
+            </p>
+
+        </div>
+
+        <div class="row">
+
+            {% for event in upcoming_events %}
+
+            <div class="col-md-4 mb-4">
+
+                <div class="event-card">
+
+                    {% if event.image %}
+
+                    <img src="{{ event.image.url }}"
+                         class="event-image">
+
+                    {% endif %}
+
+                    <div class="p-3">
+
+                        <h5>{{ event.title }}</h5>
+
+                        <p class="event-date">
+                            📅 {{ event.event_date }}
+                        </p>
+
+                        {% if event.location %}
+                        <p>
+                            📍 {{ event.location }}
+                        </p>
+                        {% endif %}
+
+                        <p>
+                            {{ event.description|truncatewords:15 }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="text-center">
+
+                <h5>
+                    No upcoming events at the moment.
+                </h5>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="text-center mt-4">
+
+            <a href="/events/"
+               class="btn btn-join">
+
+                View All Events
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="testimonial-section py-5">
+
+    <div class="container">
+
+        <h2 class="text-center mb-5">
+            What Our Students Say
+        </h2>
+
+        <div id="testimonialCarousel"
+     class="carousel slide"
+     data-bs-ride="carousel"
+     data-bs-interval="4000">
+        <div class="carousel-indicators">
+
+    {% for testimonial in testimonials %}
+
+    <button type="button"
+            data-bs-target="#testimonialCarousel"
+            data-bs-slide-to="{{ forloop.counter0 }}"
+            class="{% if forloop.first %}active{% endif %}">
+    </button>
+
+    {% endfor %}
+
+</div>
+
+            <div class="carousel-inner">
+
+                {% for testimonial in testimonials %}
+
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+
+                    <div class="testimonial-card mx-auto">
+
+                        {% if testimonial.photo %}
+
+                        <img src="{{ testimonial.photo.url }}"
+                             class="testimonial-photo">
+
+                        {% endif %}
+
+                        <p class="testimonial-text">
+
+                            "{{ testimonial.message }}"
+
+                        </p>
+
+                        <h5>
+                            {{ testimonial.student_name }}
+                        </h5>
+
+                        <small>
+                            {{ testimonial.designation }}
+                        </small>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            <button class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#testimonialCarousel"
+                    data-bs-slide="prev">
+
+                <span class="carousel-control-prev-icon"></span>
+
+            </button>
+
+            <button class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#testimonialCarousel"
+                    data-bs-slide="next">
+
+                <span class="carousel-control-next-icon"></span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

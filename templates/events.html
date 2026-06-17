@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="page-banner">
+    <div class="container text-center">
+
+        <h1>Events</h1>
+
+        <p>
+            Workshops, Performances & Announcements
+        </p>
+
+    </div>
+</section>
+
+<section class="py-5">
+
+<div class="container">
+
+<div class="row g-4">
+
+{% for event in events %}
+
+<div class="col-lg-4">
+
+    <div class="event-card">
+
+        {% if event.image %}
+
+        <img src="{{ event.image.url }}"
+             class="event-image">
+
+        {% endif %}
+
+        <div class="p-4">
+
+            <h4>
+                {{ event.title }}
+            </h4>
+
+            <p class="event-date">
+
+                📅 {{ event.event_date }}
+
+            </p>
+
+            {% if event.location %}
+
+            <p>
+
+                📍 {{ event.location }}
+
+            </p>
+
+            {% endif %}
+
+            <p>
+
+                {{ event.description|truncatewords:25 }}
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% empty %}
+
+<div class="text-center">
+
+    <h4>
+        No events available.
+    </h4>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}
